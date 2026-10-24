@@ -1,10 +1,12 @@
 package com.alvaroru.tiendainvierno.base;
 
+import java.time.LocalDate;
+
 public class Botas extends Productos {
     private int numPie;
 
-    public Botas(String nombre, float precio, int numPie) {
-        super(nombre, precio);
+    public Botas(String nombre, float precio, LocalDate fechaLlegada, int numPie) {
+        super(nombre, precio, fechaLlegada);
         this.numPie = numPie;
     }
 

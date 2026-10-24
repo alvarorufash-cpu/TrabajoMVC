@@ -1,10 +1,12 @@
 package com.alvaroru.tiendainvierno.base;
 
+import java.time.LocalDate;
+
 public class Casco extends Productos{
     private String homologacion;
 
-    public Casco(String nombre, float precio, String homologacion) {
-        super(nombre, precio);
+    public Casco(String nombre, float precio, LocalDate fechaLlegada, String homologacion) {
+        super(nombre, precio, fechaLlegada);
         this.homologacion = homologacion;
     }
 

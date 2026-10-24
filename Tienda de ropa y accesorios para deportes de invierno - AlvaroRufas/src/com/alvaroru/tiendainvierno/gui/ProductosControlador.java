@@ -4,6 +4,9 @@ import java.awt.event.*;
 
 public class ProductosControlador implements ActionListener, KeyListener, WindowListener {
 
+    public ProductosControlador(Vista vista, ProductosModelo modelo) {
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 

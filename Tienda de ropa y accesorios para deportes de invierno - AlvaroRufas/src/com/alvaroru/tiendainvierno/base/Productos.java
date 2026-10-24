@@ -1,13 +1,17 @@
 package com.alvaroru.tiendainvierno.base;
 
 
+import java.time.LocalDate;
+
 public class Productos {
     private String nombre;
     private float precio;
+    private LocalDate fechaLlegada;
 
-    public Productos(String nombre, float precio) {
+    public Productos(String nombre, float precio, LocalDate fechaLlegada) {
         this.nombre = nombre;
         this.precio = precio;
+        this.fechaLlegada = fechaLlegada;
     }
 
     public String getNombre() {
@@ -22,7 +26,9 @@ public class Productos {
         return precio;
     }
 
-    public void setPrecio(int precio) {
-        this.precio = precio;
-    }
+    public void setPrecio(int precio) { this.precio = precio; }
+
+    public LocalDate getFechaLlegada(){return fechaLlegada;}
+
+    public void setFechaLlegada(LocalDate fechaLlegada){this.fechaLlegada = fechaLlegada;}
 }

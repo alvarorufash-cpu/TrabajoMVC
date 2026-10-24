@@ -2,6 +2,8 @@ package com.alvaroru.tiendainvierno.gui;
 
 import com.alvaroru.tiendainvierno.base.*;
 
+import javax.swing.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ProductosModelo {
@@ -15,28 +17,45 @@ public class ProductosModelo {
         return listaProductos;
     }
 
-    public void altaGuantes(String nombre, float precio, boolean EsTermico){
-        Guantes guantes = new Guantes(nombre, precio, EsTermico);
+    public static void crearMenu(JMenuItem importar, JMenuItem exportar){
+        JMenuBar barra = new JMenuBar();
+        JMenu menu = new JMenu("Archivo");
+
+        importar = new JMenuItem("importar");   //INICIALIZAR
+        exportar = new JMenuItem("exportar");
+
+        importar.setActionCommand("importar");  //Decir que funcion tiene
+        importar.setActionCommand("exportar");
+
+        menu.add("importar");
+        menu.add("exportar");
+
+        barra.add(menu);
+
+    }
+
+    public void altaGuantes(String nombre, float precio, LocalDate fechaLlegada, boolean EsTactil){
+        Guantes guantes = new Guantes(nombre, precio, fechaLlegada, EsTactil);
         listaProductos.add(guantes);
     }
 
-    public void altaCasco(String nombre, float precio, String homologacion){
-        Casco casco = new Casco(nombre, precio, homologacion);
+    public void altaCasco(String nombre, float precio, LocalDate fechaLlegada, String homologacion){
+        Casco casco = new Casco(nombre, precio, fechaLlegada, homologacion);
         listaProductos.add(casco);
     }
 
-    public void altaCamisetaTermica(String nombre, float precio, String Talla){
-        CamisetaTermica camisetaTermica = new CamisetaTermica(nombre, precio, Talla);
+    public void altaCamisetaTermica(String nombre, float precio, LocalDate fechaLlegada, String Talla){
+        CamisetaTermica camisetaTermica = new CamisetaTermica(nombre, precio, fechaLlegada, Talla);
         listaProductos.add(camisetaTermica);
     }
 
-    public void altaBotas(String nombre, float precio, int numPies){
-        Botas botas = new Botas(nombre, precio, numPies);
+    public void altaBotas(String nombre, float precio, LocalDate fechaLlegada, int numPies){
+        Botas botas = new Botas(nombre, precio, fechaLlegada, numPies);
         listaProductos.add(botas);
     }
 
-    public void altaAnorak(String nombre, float precio, String descuento){
-        Anorak anorak = new Anorak(nombre, precio, descuento);
+    public void altaAnorak(String nombre, float precio, LocalDate fechaLlegada, String descuento){
+        Anorak anorak = new Anorak(nombre, precio, fechaLlegada,  descuento);
         listaProductos.add(anorak);
     }
 
