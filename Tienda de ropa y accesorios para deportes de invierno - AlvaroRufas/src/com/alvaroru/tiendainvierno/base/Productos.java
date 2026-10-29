@@ -9,6 +9,10 @@ public class Productos {
     private float precio;
     private LocalDate fechaLlegada;
 
+    public Productos(){     //Crea dos constructores, uno lleno y otro vacio
+
+    }
+
     public Productos(String nombre, float precio, LocalDate fechaLlegada, int id) {
         this.id = id;
         this.nombre = nombre;
