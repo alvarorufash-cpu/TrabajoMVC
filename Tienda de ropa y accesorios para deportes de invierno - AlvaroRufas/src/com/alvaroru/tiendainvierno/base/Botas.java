@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public class Botas extends Productos {
     private int numPie;
 
-    public Botas(String nombre, float precio, LocalDate fechaLlegada, int numPie) {
-        super(nombre, precio, fechaLlegada);
+    public Botas(String nombre, float precio, LocalDate fechaLlegada, int numPie, int id) {
+        super(nombre, precio, fechaLlegada, id);
         this.numPie = numPie;
     }
 

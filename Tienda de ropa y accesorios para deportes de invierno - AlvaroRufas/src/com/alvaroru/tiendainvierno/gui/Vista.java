@@ -21,28 +21,51 @@ public class Vista {
     public DatePicker fechaLlegada;
 
     public JFrame frame;
-    public DefaultListModel<Productos>dlmProductos;
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem item;
 
-    JMenuItem importar;
-    JMenuItem exportar;
+    public JMenuItem importar;
+    public JMenuItem exportar;
+
+    public DefaultListModel<Productos>dlmProductos; //ListaModel
+    public DefaultComboBoxModel<Productos> dcbm;    //ListaComboBox
 
     public Vista() {
         frame = new JFrame("Vista");
         frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.pack();
-        ProductosModelo.crearMenu(importar, exportar);
+        inicializar();
+        crearMenu();
         frame.setVisible(true);
     }
 
-    public void inicializar(JMenuItem importar, JMenuItem exportar){
-        frame = new JFrame();
-        VerCesta.setModel(dlmProductos);    //Indicamos donde se va a pintar la lista en la parte grafica
+    private void crearMenu(){   //En vista crear el menu
+        JMenuBar barra = new JMenuBar();
+        JMenu menu = new JMenu("Archivo");
+
+        importar = new JMenuItem("importar");   //INICIALIZAR
+        exportar = new JMenuItem("exportar");
+
+        importar.setActionCommand("importar");  //Decir que funcion tiene
+        importar.setActionCommand("exportar");
+
+        menu.add("importar");
+        menu.add("exportar");
+
+        barra.add(menu);
+
+        frame.setJMenuBar(barra);   //Poner la barra en el frame
     }
 
+    public void inicializar(){
+        //INICIALIZAR LA LISTA
+        dlmProductos = new DefaultListModel<>();
+        VerCesta.setModel(dlmProductos);
 
-
+        //INICIALIZAR EL COMBOBOX
+        dcbm = new DefaultComboBoxModel<>();
+        CategoriaProducto.setModel(dcbm);
+    }
 }
