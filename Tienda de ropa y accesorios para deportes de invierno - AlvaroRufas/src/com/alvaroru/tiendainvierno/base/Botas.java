@@ -9,8 +9,8 @@ public class Botas extends Productos {
         super();
     }
 
-    public Botas(String nombre, float precio, LocalDate fechaLlegada, int numPie, int id) {
-        super(nombre, precio, fechaLlegada, id);
+    public Botas(String nombre, float precio, String descipcion, LocalDate fechaLlegada, int numPie, int id) {
+        super(nombre, precio, descipcion, fechaLlegada, id);
         this.numPie = numPie;
     }
 

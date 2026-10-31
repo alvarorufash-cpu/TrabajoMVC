@@ -9,8 +9,8 @@ public class Anorak extends Productos{
         super();
     }
 
-    public Anorak(String nombre, float precio, LocalDate fechaLlegada, String descuento, int id) {
-        super(nombre, precio, fechaLlegada, id);
+    public Anorak(String nombre, float precio, String descripcion, LocalDate fechaLlegada, String descuento, int id) {
+        super(nombre, precio, descripcion, fechaLlegada, id);
         this.descuento = descuento;
     }
 

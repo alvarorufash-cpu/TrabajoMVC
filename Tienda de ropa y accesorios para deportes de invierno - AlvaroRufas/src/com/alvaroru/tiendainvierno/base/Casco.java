@@ -9,8 +9,8 @@ public class Casco extends Productos{
         super();
     }
 
-    public Casco(int id, String nombre, float precio, LocalDate fechaLlegada, String homologacion) {
-        super(nombre, precio, fechaLlegada, id);
+    public Casco(int id, String nombre, float precio, String descripcion, LocalDate fechaLlegada, String homologacion) {
+        super(nombre, precio, descripcion, fechaLlegada, id);
         this.homologacion = homologacion;
     }
 

@@ -8,10 +8,10 @@ import javax.swing.*;
 public class Vista {
     private JPanel panel1;
     public JComboBox CategoriaProducto;
-    public JTextField NombreProducto;
-    public JTextField textField1;
-    public JTextPane textPane1;
-    public JButton Añadir;
+    public JTextField txtNombreProducto;
+    public JTextField txtPrecio;
+    public JTextPane txtDescripcion;
+    public JButton Anadir;
     public JButton eliminarButton;
     public JButton verCestaButton;
     public JRadioButton tactilesRadioButton;
@@ -19,6 +19,9 @@ public class Vista {
     public JLabel GuantesTermicos;
     public JList VerCesta;
     public DatePicker fechaLlegada;
+    public JTextField txtID;
+    public JTextField txthomologacionTallaNumPieDescuento;
+    public JLabel homologacionTallaNumPieDescuento;
 
     public JFrame frame;
     private JMenuBar menuBar;
@@ -29,7 +32,7 @@ public class Vista {
     public JMenuItem exportar;
 
     public DefaultListModel<Productos>dlmProductos; //ListaModel
-    public DefaultComboBoxModel<Productos> dcbm;    //ListaComboBox
+    public DefaultComboBoxModel<String> dcbm;    //El comboBox sera de tipo Texto, porque le pondremos al comboBox texto
 
     public Vista() {
         frame = new JFrame("Vista");
@@ -39,6 +42,7 @@ public class Vista {
         inicializar();
         crearMenu();
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 
     private void crearMenu(){   //En vista crear el menu

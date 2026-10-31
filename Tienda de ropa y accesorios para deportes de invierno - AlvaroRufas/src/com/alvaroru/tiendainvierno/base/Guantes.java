@@ -9,9 +9,9 @@ public class Guantes extends Productos {
         super();
     }
 
-    public Guantes(int id, String nombre, float precio, LocalDate fechaLlegada, boolean esTermico) {
-        super(nombre, precio, fechaLlegada, id);
-        EsTactil = esTermico;
+    public Guantes(String nombre, float precio, String descripcion, LocalDate fechaLlegada, int id, boolean esTactil) {
+        super(nombre, precio, descripcion, fechaLlegada, id);
+        EsTactil = esTactil;
     }
 
     public boolean getEsTactil() {
@@ -21,9 +21,4 @@ public class Guantes extends Productos {
     public void setEsTactil(boolean esTactil) {
         EsTactil = esTactil;
     }
-
-    public boolean isEsTermico() {
-        return EsTactil;
-    }
-
 }

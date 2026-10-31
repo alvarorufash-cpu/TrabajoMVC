@@ -7,17 +7,22 @@ public class Productos {
     private int id;
     private String nombre;
     private float precio;
+    private String descripcion;
     private LocalDate fechaLlegada;
 
     public Productos(){     //Crea dos constructores, uno lleno y otro vacio
 
     }
 
-    public Productos(String nombre, float precio, LocalDate fechaLlegada, int id) {
+    public Productos(String nombre, float precio, String descripcion, LocalDate fechaLlegada, int id) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
+        this.descripcion = descripcion;
         this.fechaLlegada = fechaLlegada;
+    }
+
+    public Productos(String nombre, String precio, LocalDate fechaLlegada, String id) {
     }
 
     public int getId() {
@@ -42,6 +47,14 @@ public class Productos {
 
     public void setPrecio(float precio) {
         this.precio = precio;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public LocalDate getFechaLlegada() {

@@ -18,7 +18,7 @@
   <component name="ProjectId" id="3L2c63Bfbf5duRqJOYn8bVXr3lo" />
   <component name="PropertiesComponent">
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW" value="true" />
-    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="249" />
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="237" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/LGoodDatePicker-10.3.1.jar!/" />
@@ -83,7 +83,11 @@
       <workItem from="1793212602086" duration="2716000" />
       <workItem from="1793257497143" duration="86000" />
       <workItem from="1793259068723" duration="8510000" />
-      <workItem from="1793290001938" duration="5429000" />
+      <workItem from="1793290001938" duration="5523000" />
+      <workItem from="1793343834186" duration="855000" />
+      <workItem from="1793358205719" duration="765000" />
+      <workItem from="1793447845659" duration="7914000" />
+      <workItem from="1793455990761" duration="1715000" />
     </task>
     <servers />
   </component>

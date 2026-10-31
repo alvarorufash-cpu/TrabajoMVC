@@ -9,8 +9,8 @@ public class CamisetaTermica extends Productos{
         super();
     }
 
-    public CamisetaTermica(int id, String nombre, float precio, LocalDate fechaLlegada, String talla) {
-        super(nombre, precio, fechaLlegada, id);
+    public CamisetaTermica(int id, String nombre, float precio, String descipcion, LocalDate fechaLlegada, String talla) {
+        super(nombre, precio, descipcion, fechaLlegada, id);
         Talla = talla;
     }
 
