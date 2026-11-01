@@ -64,4 +64,15 @@ public class Productos {
     public void setFechaLlegada(LocalDate fechaLlegada) {
         this.fechaLlegada = fechaLlegada;
     }
+
+    @Override
+    public String toString() {
+        return "Productos{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", precio=" + precio +
+                ", descripcion='" + descripcion + '\'' +
+                ", fechaLlegada=" + fechaLlegada +
+                '}';
+    }
 }

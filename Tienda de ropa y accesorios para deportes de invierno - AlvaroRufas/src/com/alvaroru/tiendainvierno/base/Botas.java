@@ -21,4 +21,6 @@ public class Botas extends Productos {
     public void setNumPie(int numPie) {
         this.numPie = numPie;
     }
+
+
 }

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class ProductosModelo {
 
-    public ArrayList<Productos> listaProductos;
+    private ArrayList<Productos> listaProductos;
 
     public ProductosModelo() {  //CONSTRUCTOR
        this.listaProductos = new ArrayList<>();
@@ -28,11 +28,10 @@ public class ProductosModelo {
         return listaProductos;
     }
 
-
     //ALTA DE PRODUCTOS
     public void altaGuantes(int id, String nombre, float precio, String descipcion, LocalDate fechaLlegada, boolean EsTactil){
         if (existeID(id)){
-            Util.MensajeError("Error", "Ese ID ya existe");
+            Util.MensajeError("ERROR", "Ese ID ya existe");
         } else {
             Guantes guantes = new Guantes(nombre, precio, descipcion, fechaLlegada, id, EsTactil);
             listaProductos.add(guantes);
@@ -41,7 +40,7 @@ public class ProductosModelo {
 
     public void altaCasco(int id, String nombre, float precio, String descripcion, LocalDate fechaLlegada, String homologacion){
         if (existeID(id)){
-            Util.MensajeError("Error", "Ese ID ya existe");
+            Util.MensajeError("ERROR", "Ese ID ya existe");
         } else {
             Casco casco = new Casco(id, nombre, precio, descripcion, fechaLlegada, homologacion);
             listaProductos.add(casco);
@@ -50,7 +49,7 @@ public class ProductosModelo {
 
     public void altaCamisetaTermica(int id, String nombre, float precio, String descripcion, LocalDate fechaLlegada, String Talla){
         if (existeID(id)){
-            Util.MensajeError("Error", "Ese ID ya existe");
+            Util.MensajeError("ERROR", "Ese ID ya existe");
         } else {
             CamisetaTermica camisetaTermica = new CamisetaTermica(id, nombre, precio, descripcion, fechaLlegada, Talla);
             listaProductos.add(camisetaTermica);
@@ -59,7 +58,7 @@ public class ProductosModelo {
 
     public void altaBotas(int id, String nombre, float precio, String descripcion, LocalDate fechaLlegada, int numPies){
         if (existeID(id)){
-            Util.MensajeError("Error", "Ese ID ya existe");
+            Util.MensajeError("ERROR", "Ese ID ya existe");
         } else {
             Botas botas = new Botas(nombre, precio, descripcion, fechaLlegada, numPies, id);
             listaProductos.add(botas);
@@ -68,31 +67,34 @@ public class ProductosModelo {
 
     public void altaAnorak(int id, String nombre, float precio, String descripcion, LocalDate fechaLlegada, String descuento){
         if (existeID(id)){
-            Util.MensajeError("Error", "Ese ID ya existe");
+            Util.MensajeError("ERROR", "Ese ID ya existe");
         } else {
             Anorak anorak = new Anorak(nombre, precio, descripcion, fechaLlegada,  descuento, id);
             listaProductos.add(anorak);
         }
     }
 
+
     public boolean existeID(int productosid){
-        boolean existe;
+        boolean existe=false;
         for (Productos productos: listaProductos) {
-            if (productos.equals(productosid)) {
-                return true;
+            if (productos.getId() == productosid) {
+                existe = true;
+                break;
             }
         }
-        return false;
+        return existe;
     }
 
     //ELIMINAR PRODUCTO POR ID
-    public void eliminarGuantes(Productos producto, int id){
+    public void eliminarProducto(Productos producto, int id){
         if (existeID(id) == true){
             listaProductos.remove(producto);
         }else {
             Util.MensajeError("Error", "El ID no existe");
         }
     }
+
 
     //EXPORTAR XML
     public void ExportarXML(File fichero) throws ParserConfigurationException, TransformerException {     //Recibe el fichero

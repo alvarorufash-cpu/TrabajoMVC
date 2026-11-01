@@ -21,4 +21,6 @@ public class Guantes extends Productos {
     public void setEsTactil(boolean esTactil) {
         EsTactil = esTactil;
     }
+
+
 }

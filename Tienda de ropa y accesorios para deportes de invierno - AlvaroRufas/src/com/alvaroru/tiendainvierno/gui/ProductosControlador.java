@@ -45,6 +45,30 @@ public class ProductosControlador implements ActionListener, ListSelectionListen
         vista.frame.addWindowListener(listener);    //Si ocurre algo en la ventana, este lo recibira
     }
 
+    private boolean SinCampos(){
+        if (vista.txtID.getText().isEmpty() || vista.txtNombreProducto.getText().isEmpty() ||
+            vista.txtPrecio.getText().isEmpty() || vista.txtDescripcion.getText().isEmpty() || vista.fechaLlegada.getDate().equals("")){
+            return true;
+        }
+        return false;
+    }
+
+    private void limpiarCampos(){
+        vista.txtID.setText(null);
+        vista.txtNombreProducto.setText(null);
+        vista.txtPrecio.setText(null);
+        vista.txthomologacionTallaNumPieDescuento.setText(null);
+        vista.txtDescripcion.setText(null);
+        vista.fechaLlegada.setDate(null);
+    }
+
+    private void refresccar(){
+        vista.dlmProductos.clear();
+        for (Productos producto: modelo.obtenerLista()) {
+            vista.dlmProductos.addElement(producto);
+        }
+    }
+
     private void categoriaComboBox(){
         vista.dcbm.addElement("Guantes");
         vista.dcbm.addElement("Casco");
@@ -59,40 +83,115 @@ public class ProductosControlador implements ActionListener, ListSelectionListen
 
         switch (opcion){
             case "Añadir":
-                if (vista.dcbm.equals("Guantes")){
-                    modelo.altaGuantes(Integer.parseInt(vista.txtID.getText()), vista.txtNombreProducto.getText(), Float.parseFloat(vista.txtPrecio.getText()),
-                            vista.txtDescripcion.getText(),vista.fechaLlegada.getDate(), vista.tactilesRadioButton.isSelected());
+                if (vista.dcbm.getSelectedItem().equals("Guantes")){
+                    if (SinCampos() && (!vista.tactilesRadioButton.isSelected() || !vista.noTactilesRadioButton.isSelected())){
+                        Util.MensajeError("ERROR", "Hay campos sin seleccionar");
+                    }else {
+                        modelo.altaGuantes(Integer.parseInt(vista.txtID.getText()), vista.txtNombreProducto.getText(), Float.parseFloat(vista.txtPrecio.getText()),
+                                vista.txtDescripcion.getText(),vista.fechaLlegada.getDate(), vista.tactilesRadioButton.isSelected());
+                    }
                 }
 
-                if (vista.dcbm.equals("Casco")){
-                    modelo.altaCasco(Integer.parseInt(vista.txtID.getText()), vista.txtNombreProducto.getText(), Float.parseFloat(vista.txtPrecio.getText()),
-                            vista.txtDescripcion.getText(),vista.fechaLlegada.getDate(), vista.homologacionTallaNumPieDescuento.getText());
+                if (vista.dcbm.getSelectedItem().equals("Casco")){
+                    if (SinCampos() && (vista.txthomologacionTallaNumPieDescuento.getText().isEmpty())){
+                        Util.MensajeError("ERROR", "Hay campos sin seleccionar");
+                    } else {
+                        modelo.altaCasco(Integer.parseInt(vista.txtID.getText()), vista.txtNombreProducto.getText(), Float.parseFloat(vista.txtPrecio.getText()),
+                                vista.txtDescripcion.getText(),vista.fechaLlegada.getDate(), vista.txthomologacionTallaNumPieDescuento.getText());
+                    }
+
                 }
 
-                if (vista.dcbm.equals("CamisetaTermica")){
-                    modelo.altaCamisetaTermica(Integer.parseInt(vista.txtID.getText()), vista.txtNombreProducto.getText(), Float.parseFloat(vista.txtPrecio.getText()),
-                            vista.txtDescripcion.getText(),vista.fechaLlegada.getDate(), vista.homologacionTallaNumPieDescuento.getText());
+                if (vista.dcbm.getSelectedItem().equals("CamisetaTermica")){
+                    if (SinCampos() && (vista.txthomologacionTallaNumPieDescuento.getText().isEmpty())){
+                        Util.MensajeError("ERROR", "Hay campos sin seleccionar");
+                    } else {
+                        modelo.altaCamisetaTermica(Integer.parseInt(vista.txtID.getText()), vista.txtNombreProducto.getText(), Float.parseFloat(vista.txtPrecio.getText()),
+                                vista.txtDescripcion.getText(),vista.fechaLlegada.getDate(), vista.txthomologacionTallaNumPieDescuento.getText());
+
+                    }
                 }
 
-                if (vista.dcbm.equals("Botas")){
-                    modelo.altaBotas(Integer.parseInt(vista.txtID.getText()), vista.txtNombreProducto.getText(), Float.parseFloat(vista.txtPrecio.getText()),
-                            vista.txtDescripcion.getText(),vista.fechaLlegada.getDate(), Integer.parseInt(vista.homologacionTallaNumPieDescuento.getText()));
+                if (vista.dcbm.getSelectedItem().equals("Botas")){
+                    if (SinCampos() && (vista.txthomologacionTallaNumPieDescuento.getText().isEmpty())){
+                        Util.MensajeError("ERROR", "Hay campos sin seleccionar");
+                    } else {
+                        modelo.altaBotas(Integer.parseInt(vista.txtID.getText()), vista.txtNombreProducto.getText(), Float.parseFloat(vista.txtPrecio.getText()),
+                                vista.txtDescripcion.getText(),vista.fechaLlegada.getDate(), Integer.parseInt(vista.txthomologacionTallaNumPieDescuento.getText()));
+
+                    }
                 }
 
-                if (vista.dcbm.equals("Anorak")){
-                    modelo.altaAnorak(Integer.parseInt(vista.txtID.getText()), vista.txtNombreProducto.getText(), Float.parseFloat(vista.txtPrecio.getText()),
-                            vista.txtDescripcion.getText(),vista.fechaLlegada.getDate(), vista.homologacionTallaNumPieDescuento.getText());
-                }
+                if (vista.dcbm.getSelectedItem().equals("Anorak")){
+                    if (SinCampos() && (vista.txthomologacionTallaNumPieDescuento.getText().isEmpty())){
+                        Util.MensajeError("ERROR", "Hay campos sin seleccionar");
+                    } else {
+                        modelo.altaAnorak(Integer.parseInt(vista.txtID.getText()), vista.txtNombreProducto.getText(), Float.parseFloat(vista.txtPrecio.getText()),
+                                vista.txtDescripcion.getText(),vista.fechaLlegada.getDate(), vista.txthomologacionTallaNumPieDescuento.getText());
 
+                    }
+                }
+                refresccar();
+                limpiarCampos();
                 break;
 
-            case "Eliminar":
-
+                case "Eliminar":
+                Productos productoSeleccionado = (Productos) vista.VerCesta.getSelectedValue(); //Creamos una variable que guardara de la lista el seleccionado
+                modelo.eliminarProducto(productoSeleccionado, productoSeleccionado.getId());
+                refresccar();
                 break;
 
-            case "Ver Cesta":
-
+            case "Importar":
                 break;
+
+            case "Exportar":
+                break;
+        }
+
+        if (vista.CategoriaProducto.getSelectedItem().equals("Guantes")){
+            vista.GuantesTactiles.setEnabled(true);
+            vista.tactilesRadioButton.setEnabled(true);
+            vista.noTactilesRadioButton.setEnabled(true);
+
+            vista.homologacionTallaNumPieDescuento.setEnabled(false);
+            vista.txthomologacionTallaNumPieDescuento.setEnabled(false);
+
+        }
+        else if (vista.CategoriaProducto.getSelectedItem().equals("Casco")){
+            vista.GuantesTactiles.setEnabled(false);
+            vista.tactilesRadioButton.setEnabled(false);
+            vista.noTactilesRadioButton.setEnabled(false);
+
+            vista.homologacionTallaNumPieDescuento.setEnabled(true);
+            vista.txthomologacionTallaNumPieDescuento.setEnabled(true);
+            vista.homologacionTallaNumPieDescuento.setText("Homologacion");
+        }
+        else if (vista.CategoriaProducto.getSelectedItem().equals("CamisetaTermica")){
+            vista.GuantesTactiles.setEnabled(false);
+            vista.tactilesRadioButton.setEnabled(false);
+            vista.noTactilesRadioButton.setEnabled(false);
+
+            vista.homologacionTallaNumPieDescuento.setEnabled(true);
+            vista.txthomologacionTallaNumPieDescuento.setEnabled(true);
+            vista.homologacionTallaNumPieDescuento.setText("Talla");
+        }
+        else if (vista.CategoriaProducto.getSelectedItem().equals("Botas")){
+            vista.GuantesTactiles.setEnabled(false);
+            vista.tactilesRadioButton.setEnabled(false);
+            vista.noTactilesRadioButton.setEnabled(false);
+
+            vista.homologacionTallaNumPieDescuento.setEnabled(true);
+            vista.txthomologacionTallaNumPieDescuento.setEnabled(true);
+            vista.homologacionTallaNumPieDescuento.setText("Numero de Pie");
+        }
+        else if (vista.CategoriaProducto.getSelectedItem().equals("Anorak")){
+            vista.GuantesTactiles.setEnabled(false);
+            vista.tactilesRadioButton.setEnabled(false);
+            vista.noTactilesRadioButton.setEnabled(false);
+
+            vista.homologacionTallaNumPieDescuento.setEnabled(true);
+            vista.txthomologacionTallaNumPieDescuento.setEnabled(true);
+            vista.homologacionTallaNumPieDescuento.setText("Descuento");
         }
 
     }

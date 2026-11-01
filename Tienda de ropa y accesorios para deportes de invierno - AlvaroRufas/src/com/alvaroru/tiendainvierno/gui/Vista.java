@@ -16,7 +16,7 @@ public class Vista {
     public JButton verCestaButton;
     public JRadioButton tactilesRadioButton;
     public JRadioButton noTactilesRadioButton;
-    public JLabel GuantesTermicos;
+    public JLabel GuantesTactiles;
     public JList VerCesta;
     public DatePicker fechaLlegada;
     public JTextField txtID;
