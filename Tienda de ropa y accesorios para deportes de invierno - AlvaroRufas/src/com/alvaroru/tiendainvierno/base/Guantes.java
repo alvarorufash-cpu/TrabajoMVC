@@ -22,5 +22,8 @@ public class Guantes extends Productos {
         EsTactil = esTactil;
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString() + ", Es Tactil: " + EsTactil;
+    }
 }

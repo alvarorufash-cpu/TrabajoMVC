@@ -22,5 +22,8 @@ public class CamisetaTermica extends Productos{
         Talla = talla;
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString() + ", talla" + Talla;
+    }
 }

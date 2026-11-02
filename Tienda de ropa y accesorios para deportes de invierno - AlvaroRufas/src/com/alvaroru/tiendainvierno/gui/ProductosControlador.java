@@ -2,14 +2,15 @@ package com.alvaroru.tiendainvierno.gui;
 
 import Util.Util;
 import com.alvaroru.tiendainvierno.base.*;
+import org.xml.sax.SAXException;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -22,19 +23,42 @@ public class ProductosControlador implements ActionListener, ListSelectionListen
         this.vista = vista;
         this.modelo = modelo;
 
+        try {
+            cargarDatosConfiguracion();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         addActionListener(this);        //CREO LOS METODOS, NO SE IMPLEMENTAN
         addListSelectionListener(this);
         addWindowListener(this);
         categoriaComboBox();
     }
 
+    //AHORA VAMOS CON LOS TRES DATOS CONFIGURACION
+
+    private void actualizarDatosConfiguracion(){
+        this.ultimaRutaExportada = ultimaRutaExportada;
+    }
+
+    private void guardarDatosConfiguracion() throws IOException {
+        Properties configuracion = new Properties();
+        configuracion.setProperty("ultimaRutaExportada", ultimaRutaExportada.getAbsolutePath());
+        configuracion.store(new PrintWriter("Productos.conf"), "Datos configuracion de Productos");
+    }
+
+    private void cargarDatosConfiguracion() throws IOException {
+        Properties configuracion = new Properties();
+        configuracion.load(new FileReader("Productos.conf"));
+        ultimaRutaExportada = new File(configuracion.getProperty("ultimaRutaExportada"));
+    }
+
     private void addActionListener(ActionListener actionListener) {     //Cuando se pulse un boton
         vista.Anadir.addActionListener(actionListener);    //Pilla el actionListener (que es lo que recibe el metodo)
         vista.eliminarButton.addActionListener(actionListener);
-        vista.verCestaButton.addActionListener(actionListener);
         vista.CategoriaProducto.addActionListener(actionListener);  //También ponemos el ComboBox, porque aunque muestre una lista, se detecta como boton
-        vista.importar.addActionListener(actionListener);
-        vista.exportar.addActionListener(actionListener);
+        vista.Importar.addActionListener(actionListener);
+        vista.Exportar.addActionListener(actionListener);
     }
 
     private void addListSelectionListener(ListSelectionListener listener) {     //Para mostrar listas o tablas
@@ -142,9 +166,37 @@ public class ProductosControlador implements ActionListener, ListSelectionListen
                 break;
 
             case "Importar":
+                JFileChooser selectorFichero = Util.SelectorFichero(ultimaRutaExportada, "Archivo XML", "xml");
+
+                int opt = selectorFichero.showOpenDialog(null);
+                if (opt == JFileChooser.APPROVE_OPTION){
+                    try {
+                        modelo.importarXML(selectorFichero.getSelectedFile()); //Importara del selector el fichero seleccionado
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                    }
+                    refresccar();
+                }
+
                 break;
 
             case "Exportar":
+                JFileChooser selectorFichero2 = Util.SelectorFichero(ultimaRutaExportada, "Archivo XML", "xml");
+                int opt2 = selectorFichero2.showOpenDialog(null);
+                if (opt2 == JFileChooser.APPROVE_OPTION){
+                    try {
+                        modelo.exportarXML(selectorFichero2.getSelectedFile());
+                        actualizarDatosConfiguracion();
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (TransformerException ex) {
+                        ex.printStackTrace();
+                    }
+                }
                 break;
         }
 
@@ -201,9 +253,63 @@ public class ProductosControlador implements ActionListener, ListSelectionListen
         int opcion = Util.MensajeConfirmacion("¿Desea cerrar la ventana?", "Confirmacion para cerrar");
 
         if (opcion == JOptionPane.OK_OPTION){   //Si la opcion es el okey
+            try {
+                guardarDatosConfiguracion();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
             System.exit(0);
         }
 
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if (e.getValueIsAdjusting()){
+            Productos productoSeleccionado = (Productos) vista.VerCesta.getSelectedValue();
+            vista.txtID.setText(String.valueOf(productoSeleccionado.getId()));
+            vista.txtNombreProducto.setText(productoSeleccionado.getNombre());
+            vista.txtPrecio.setText(String.valueOf(productoSeleccionado.getPrecio()));
+            vista.txtDescripcion.setText(productoSeleccionado.getDescripcion());
+            vista.fechaLlegada.setDate(productoSeleccionado.getFechaLlegada());
+            if (productoSeleccionado instanceof Guantes && ((Guantes) productoSeleccionado).getEsTactil() == true){
+                vista.GuantesTactiles.setEnabled(true);
+                vista.tactilesRadioButton.setEnabled(true);
+                vista.noTactilesRadioButton.setEnabled(true);
+                vista.tactilesRadioButton.doClick();
+            } else {
+                vista.GuantesTactiles.setEnabled(true);
+                vista.tactilesRadioButton.setEnabled(true);
+                vista.noTactilesRadioButton.setEnabled(true);
+                vista.noTactilesRadioButton.doClick();
+            }
+            if (productoSeleccionado instanceof Casco){
+                vista.GuantesTactiles.setEnabled(false);
+                vista.tactilesRadioButton.setEnabled(false);
+                vista.homologacionTallaNumPieDescuento.setEnabled(true);
+                vista.txthomologacionTallaNumPieDescuento.setEnabled(true);
+                vista.txthomologacionTallaNumPieDescuento.setText(((Casco) productoSeleccionado).getHomologacion());
+            }
+            if (productoSeleccionado instanceof CamisetaTermica){
+                vista.GuantesTactiles.setEnabled(false);
+                vista.tactilesRadioButton.setEnabled(false);
+                vista.homologacionTallaNumPieDescuento.setEnabled(true);
+                vista.txthomologacionTallaNumPieDescuento.setEnabled(true);
+                vista.txthomologacionTallaNumPieDescuento.setText(((CamisetaTermica) productoSeleccionado).getTalla());
+            }
+            if (productoSeleccionado instanceof Botas){
+                vista.GuantesTactiles.setEnabled(false);
+                vista.tactilesRadioButton.setEnabled(false);
+                vista.homologacionTallaNumPieDescuento.setEnabled(true);
+                vista.txthomologacionTallaNumPieDescuento.setEnabled(true);
+                vista.txthomologacionTallaNumPieDescuento.setText(String.valueOf(((Botas) productoSeleccionado).getNumPie()));
+            }
+            if (productoSeleccionado instanceof Anorak){
+                vista.homologacionTallaNumPieDescuento.setEnabled(false);
+                vista.txthomologacionTallaNumPieDescuento.setEnabled(false);
+                vista.txthomologacionTallaNumPieDescuento.setText(((Anorak) productoSeleccionado).getDescuento());
+            }
+        }
     }
 
     @Override
@@ -233,11 +339,6 @@ public class ProductosControlador implements ActionListener, ListSelectionListen
 
     @Override
     public void windowDeactivated(WindowEvent e) {
-
-    }
-
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
 
     }
 }

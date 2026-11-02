@@ -28,8 +28,8 @@ public class Vista {
     private JMenu menu;
     private JMenuItem item;
 
-    public JMenuItem importar;
-    public JMenuItem exportar;
+    public JMenuItem Importar;
+    public JMenuItem Exportar;
 
     public DefaultListModel<Productos>dlmProductos; //ListaModel
     public DefaultComboBoxModel<String> dcbm;    //El comboBox sera de tipo Texto, porque le pondremos al comboBox texto
@@ -43,20 +43,21 @@ public class Vista {
         crearMenu();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+        frame.setSize(500, 500);
     }
 
     private void crearMenu(){   //En vista crear el menu
         JMenuBar barra = new JMenuBar();
         JMenu menu = new JMenu("Archivo");
 
-        importar = new JMenuItem("importar");   //INICIALIZAR
-        exportar = new JMenuItem("exportar");
+        Importar = new JMenuItem("Importar");   //INICIALIZAR
+        Exportar = new JMenuItem("Exportar");
 
-        importar.setActionCommand("importar");  //Decir que funcion tiene
-        importar.setActionCommand("exportar");
+        Importar.setActionCommand("Importar");  //Decir que funcion tiene
+        Exportar.setActionCommand("Exportar");
 
-        menu.add("importar");
-        menu.add("exportar");
+        menu.add(Importar);     //SIN COMILLAS
+        menu.add(Exportar);
 
         barra.add(menu);
 

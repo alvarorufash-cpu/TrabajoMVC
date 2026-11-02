@@ -22,5 +22,8 @@ public class Anorak extends Productos{
         this.descuento = descuento;
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString() + ", descuento" + descuento;
+    }
 }

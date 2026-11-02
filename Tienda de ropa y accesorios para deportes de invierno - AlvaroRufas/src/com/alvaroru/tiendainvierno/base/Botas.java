@@ -22,5 +22,8 @@ public class Botas extends Productos {
         this.numPie = numPie;
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString() + ", numPie" + numPie;
+    }
 }

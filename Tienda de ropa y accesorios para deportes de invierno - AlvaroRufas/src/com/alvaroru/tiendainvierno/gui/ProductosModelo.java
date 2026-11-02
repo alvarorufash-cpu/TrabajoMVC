@@ -97,7 +97,7 @@ public class ProductosModelo {
 
 
     //EXPORTAR XML
-    public void ExportarXML(File fichero) throws ParserConfigurationException, TransformerException {     //Recibe el fichero
+    public void exportarXML(File fichero) throws ParserConfigurationException, TransformerException {     //Recibe el fichero
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();  //NO PONER NEW
         DocumentBuilder builder = factory.newDocumentBuilder();
         DOMImplementation dom = builder.getDOMImplementation();
@@ -149,7 +149,7 @@ public class ProductosModelo {
             nodoDatos.appendChild(texto);
 
             if (producto instanceof Guantes){
-                nodoDatos = documento.createElement("Es Tactil");
+                nodoDatos = documento.createElement("Es_Tactil");
                 nodoProductos.appendChild(nodoDatos);
                 texto = documento.createTextNode(String.valueOf(((Guantes) producto).getEsTactil()));
                 nodoDatos.appendChild(texto);
@@ -167,7 +167,7 @@ public class ProductosModelo {
                 nodoDatos.appendChild(texto);
 
             } else if (producto instanceof Botas){
-                nodoDatos = documento.createElement("Num Pie");
+                nodoDatos = documento.createElement("Num_Pie");
                 nodoProductos.appendChild(nodoDatos);
                 texto = documento.createTextNode(String.valueOf(((Botas) producto).getNumPie()));
                 nodoDatos.appendChild(texto);

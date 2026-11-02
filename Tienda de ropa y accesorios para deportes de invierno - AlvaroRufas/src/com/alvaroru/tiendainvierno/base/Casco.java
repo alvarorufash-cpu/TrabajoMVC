@@ -22,5 +22,8 @@ public class Casco extends Productos{
         this.homologacion = homologacion;
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString() + ", homologacion: " + homologacion;
+    }
 }

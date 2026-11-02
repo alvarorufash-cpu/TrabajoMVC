@@ -67,12 +67,6 @@ public class Productos {
 
     @Override
     public String toString() {
-        return "Productos{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", precio=" + precio +
-                ", descripcion='" + descripcion + '\'' +
-                ", fechaLlegada=" + fechaLlegada +
-                '}';
+        return getClass().getSimpleName() + ": " + id + ", "+ nombre + ", "+ precio + ", "+ descripcion + ", "+ fechaLlegada;
     }
 }
