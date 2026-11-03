@@ -143,6 +143,11 @@ public class ProductosModelo {
             texto = documento.createTextNode(String.valueOf(producto.getPrecio()));
             nodoDatos.appendChild(texto);
 
+            nodoDatos = documento.createElement("Descripcion");
+            nodoProductos.appendChild(nodoDatos);
+            texto = documento.createTextNode(producto.getDescripcion());
+            nodoDatos.appendChild(texto);   //Nodo datos tiene metido a texto
+
             nodoDatos = documento.createElement("fecha_llegada");
             nodoProductos.appendChild(nodoDatos);
             texto = documento.createTextNode(producto.getFechaLlegada().toString());
@@ -210,8 +215,9 @@ public class ProductosModelo {
                 nuevoGuante.setId(Integer.parseInt(nodoProducto.getChildNodes().item(0).getTextContent()));
                 nuevoGuante.setNombre(nodoProducto.getChildNodes().item(1).getTextContent());
                 nuevoGuante.setPrecio(Float.parseFloat(nodoProducto.getChildNodes().item(2).getTextContent()));
-                nuevoGuante.setFechaLlegada(LocalDate.parse(nodoProducto.getChildNodes().item(3).getTextContent()));
-                nuevoGuante.setEsTactil(Boolean.parseBoolean(nodoProducto.getChildNodes().item(4).getTextContent()));
+                nuevoGuante.setDescripcion(nodoProducto.getChildNodes().item(3).getTextContent());
+                nuevoGuante.setFechaLlegada(LocalDate.parse(nodoProducto.getChildNodes().item(4).getTextContent()));
+                nuevoGuante.setEsTactil(Boolean.parseBoolean(nodoProducto.getChildNodes().item(5).getTextContent()));
                 listaProductos.add(nuevoGuante);
             }
             if (nodoProducto.getTagName().equals("Casco")){
@@ -219,8 +225,9 @@ public class ProductosModelo {
                 nuevoCasco.setId(Integer.parseInt(nodoProducto.getChildNodes().item(0).getTextContent()));
                 nuevoCasco.setNombre(nodoProducto.getChildNodes().item(1).getTextContent());
                 nuevoCasco.setPrecio(Float.parseFloat(nodoProducto.getChildNodes().item(2).getTextContent()));
-                nuevoCasco.setFechaLlegada(LocalDate.parse(nodoProducto.getChildNodes().item(3).getTextContent()));
-                nuevoCasco.setHomologacion(nodoProducto.getChildNodes().item(4).getTextContent());
+                nuevoCasco.setDescripcion(nodoProducto.getChildNodes().item(3).getTextContent());
+                nuevoCasco.setFechaLlegada(LocalDate.parse(nodoProducto.getChildNodes().item(4).getTextContent()));
+                nuevoCasco.setHomologacion(nodoProducto.getChildNodes().item(5).getTextContent());
                 listaProductos.add(nuevoCasco);
             }
             if (nodoProducto.getTagName().equals("CamisetaTermica")){
@@ -228,8 +235,9 @@ public class ProductosModelo {
                 nuevaCamisetaTermica.setId(Integer.parseInt(nodoProducto.getChildNodes().item(0).getTextContent()));
                 nuevaCamisetaTermica.setNombre(nodoProducto.getChildNodes().item(1).getTextContent());
                 nuevaCamisetaTermica.setPrecio(Float.parseFloat(nodoProducto.getChildNodes().item(2).getTextContent()));
-                nuevaCamisetaTermica.setFechaLlegada(LocalDate.parse(nodoProducto.getChildNodes().item(3).getTextContent()));
-                nuevaCamisetaTermica.setTalla(nodoProducto.getChildNodes().item(4).getTextContent());
+                nuevaCamisetaTermica.setDescripcion(nodoProducto.getChildNodes().item(3).getTextContent());
+                nuevaCamisetaTermica.setFechaLlegada(LocalDate.parse(nodoProducto.getChildNodes().item(4).getTextContent()));
+                nuevaCamisetaTermica.setTalla(nodoProducto.getChildNodes().item(5).getTextContent());
                 listaProductos.add(nuevaCamisetaTermica);
             }
             if (nodoProducto.getTagName().equals("Botas")){
@@ -237,8 +245,9 @@ public class ProductosModelo {
                 nuevasBotas.setId(Integer.parseInt(nodoProducto.getChildNodes().item(0).getTextContent()));
                 nuevasBotas.setNombre(nodoProducto.getChildNodes().item(1).getTextContent());
                 nuevasBotas.setPrecio(Float.parseFloat(nodoProducto.getChildNodes().item(2).getTextContent()));
-                nuevasBotas.setFechaLlegada(LocalDate.parse(nodoProducto.getChildNodes().item(3).getTextContent()));
-                nuevasBotas.setNumPie(Integer.parseInt(nodoProducto.getChildNodes().item(4).getTextContent()));
+                nuevasBotas.setDescripcion(nodoProducto.getChildNodes().item(4).getTextContent());
+                nuevasBotas.setFechaLlegada(LocalDate.parse(nodoProducto.getChildNodes().item(5).getTextContent()));
+                nuevasBotas.setNumPie(Integer.parseInt(nodoProducto.getChildNodes().item(6).getTextContent()));
                 listaProductos.add(nuevasBotas);
             }
             if (nodoProducto.getTagName().equals("Anorak")){
@@ -246,8 +255,9 @@ public class ProductosModelo {
                 nuevoAnorak.setId(Integer.parseInt(nodoProducto.getChildNodes().item(0).getTextContent()));
                 nuevoAnorak.setNombre(nodoProducto.getChildNodes().item(1).getTextContent());
                 nuevoAnorak.setPrecio(Float.parseFloat(nodoProducto.getChildNodes().item(2).getTextContent()));
-                nuevoAnorak.setFechaLlegada(LocalDate.parse(nodoProducto.getChildNodes().item(3).getTextContent()));
-                nuevoAnorak.setDescuento(nodoProducto.getChildNodes().item(4).getTextContent());
+                nuevoAnorak.setDescripcion(nodoProducto.getChildNodes().item(4).getTextContent());
+                nuevoAnorak.setFechaLlegada(LocalDate.parse(nodoProducto.getChildNodes().item(5).getTextContent()));
+                nuevoAnorak.setDescuento(nodoProducto.getChildNodes().item(6).getTextContent());
                 listaProductos.add(nuevoAnorak);
             }
 

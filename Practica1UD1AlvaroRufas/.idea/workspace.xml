@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Practica1UD1AlvaroRufas:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="d108e1a2-3e17-4437-b9f9-ca8e944d7d9d" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,8 +40,8 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="237" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -108,7 +113,10 @@
       <workItem from="1793528905654" duration="9767000" />
       <workItem from="1793615386846" duration="11688000" />
       <workItem from="1793691282519" duration="246000" />
-      <workItem from="1793691654853" duration="62000" />
+      <workItem from="1793691654853" duration="618000" />
+      <workItem from="1793692322576" duration="1553000" />
+      <workItem from="1793696021094" duration="363000" />
+      <workItem from="1793726711677" duration="1044000" />
     </task>
     <servers />
   </component>
